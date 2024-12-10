@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingPathVariableException;
@@ -62,26 +63,8 @@ public class ControllerAdvice {
             return ResponseEntity.status(400).body(new ApiResponse(msg));
         }
 
-        @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
-        public ResponseEntity<ApiResponse> HttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
-            String msg = e.getMessage();
-            return ResponseEntity.status(400).body(new ApiResponse(msg));
-        }
-
-        @ExceptionHandler(value = HttpMessageNotReadableException.class)
-        public ResponseEntity<ApiResponse> HttpMessageNotReadableException(HttpMessageNotReadableException e) {
-            String msg = e.getMessage();
-            return ResponseEntity.status(400).body(new ApiResponse(msg));
-        }
-
         @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
         public ResponseEntity<ApiResponse> MethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
-            String msg = e.getMessage();
-            return ResponseEntity.status(400).body(new ApiResponse(msg));
-        }
-
-        @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-        public ResponseEntity<ApiResponse> HttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException e) {
             String msg = e.getMessage();
             return ResponseEntity.status(400).body(new ApiResponse(msg));
         }
@@ -99,7 +82,7 @@ public class ControllerAdvice {
         }
 
         @ExceptionHandler(MissingPathVariableException.class)
-        public ResponseEntity<ApiResponse> handleMissingPathVariable(MissingPathVariableException e) {
+        public ResponseEntity<ApiResponse> MissingPathVariable(MissingPathVariableException e) {
             String msg = e.getMessage();
             return ResponseEntity.status(400).body(new ApiResponse(msg));
         }
@@ -110,9 +93,9 @@ public class ControllerAdvice {
             return ResponseEntity.status(400).body(new ApiResponse(msg));
         }
 
-        @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
-        public ResponseEntity<ApiResponse> HttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException e) {
-            String msg= e.getMessage();
+        @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+        public ResponseEntity<ApiResponse> HttpMediaTypeNotSupportedException (HttpMediaTypeNotSupportedException e) {
+            String msg = e.getMessage();
             return ResponseEntity.status(400).body(new ApiResponse(msg));
         }
 
@@ -141,7 +124,7 @@ public class ControllerAdvice {
         }
 
         @ExceptionHandler(MaxUploadSizeExceededException.class)
-        public ResponseEntity<ApiResponse> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
+        public ResponseEntity<ApiResponse> MaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
             String msg= e.getMessage();
             return ResponseEntity.status(400).body(new ApiResponse(msg));
         }
